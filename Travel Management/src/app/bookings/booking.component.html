@@ -1,0 +1,115 @@
+<div class="container col-8">
+    <form [formGroup]="bookingForm" (ngSubmit)="save()">
+        <div class="modal-header">
+            <h4 class="modal-title">Book New Trip</h4>
+            <button type="button" class="close" aria-label="Close" [routerLink]="['/booking']">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-6 field-label-responsive">
+                    <label for="from">From</label>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <input type="text" formControlName="from" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && bookingForm.controls.from.errors}" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 field-label-responsive">
+                    <label for="to">To</label>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <input type="text" formControlName="to" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && bookingForm.controls.to.errors}" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 field-label-responsive">
+                    <label for="numberOfPassanger">Number of Passanger</label>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <input type="text" formControlName="numberOfPassanger" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && bookingForm.controls.numberOfPassanger.errors}" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 field-label-responsive">
+                    <label for="name">Date</label>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" formControlName="date" name="dp" ngbDatepicker
+                                #d="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                                    type="button"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 field-label-responsive">
+                    <label for="name">Customer Name</label>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" formControlName="customerName" name="customerName" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 field-label-responsive">
+                    <label for="name">Mobile</label>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" formControlName="customerMobile" name="mobile" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 field-label-responsive">
+                    <label for="name">Time</label>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <ngb-timepicker formControlName="time"></ngb-timepicker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" [routerLink]="['/booking']">Cancel</button>
+            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Save</button>
+        </div>
+    </form>
+</div>

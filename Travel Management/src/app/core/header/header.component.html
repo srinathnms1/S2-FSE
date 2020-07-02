@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="topnav">
+    <a class="navbar-brand" title="Online Travel Management System" href="/">
+      <i class="fa fa-car" aria-hidden="true"></i>
+    </a>
+    <ng-container *ngIf="isUserLoggedIn">
+      <a [routerLink]="['/dashboard']" [routerLinkActive]="'active'">Home</a>
+      <a [routerLink]="['./booking']" [routerLinkActive]="'active'">Booking</a>
+      <a [routerLink]="['./logout']" [routerLinkActive]="'active'" class="float-right">Logout</a>
+    </ng-container>
+    <ng-container *ngIf="!isUserLoggedIn">
+      <a [routerLink]="['/login']" [routerLinkActive]="'active'">Login</a>
+      <a [routerLink]="['./registration']" [routerLinkActive]="'active'">Sign Up</a>
+    </ng-container>
+  </div>
+</div>

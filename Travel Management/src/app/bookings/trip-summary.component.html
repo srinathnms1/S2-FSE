@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="row m-2">
+        <div class="col-9">
+            <h2>Trip Summary</h2>
+        </div>
+        <div class="col-3 text-right" *ngIf="isCustomer">
+            <button type="button" class="btn btn-success" [routerLink]="['/booking/create']">
+                <i class="fa fa-plus"></i>
+                Book a new trip
+            </button>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <ng-container *ngIf="isCustomer; then customer; else employee">
+            </ng-container>
+            <ng-template #customer>
+                <h6 class="card-subtitle mb-2 text-muted">Your Bookings</h6>
+            </ng-template>
+
+            <ng-template #employee>
+                <h6 class="card-subtitle mb-2 text-muted">Upcomming Trips</h6>
+            </ng-template>
+            <app-upcomming-trip></app-upcomming-trip>
+        </div>
+    </div>
+    <div class="card mt-3">
+        <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted">History</h6>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Date Time</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="!trips">
+                    There is no trip summary...
+                </tbody>
+                <tbody>
+                    <tr *ngFor="let trip of trips">
+                        <td>{{trip.createdOn | date: 'medium'}}</td>
+                        <td>{{trip.from | titlecase}}</td>
+                        <td>{{trip.to | titlecase}}</td>
+                        <td>{{trip.status }}</td>
+                        <td>
+                            <button *ngIf="trip.status==='ReadyToPick' && !isCustomer" type="button" (click)="onStart(trip.id)" class="btn btn-secondary m-1">Start</button>
+                            <button *ngIf="trip.status==='InProgress' && !isCustomer" type="button" (click)="onComplete(trip)" class="btn btn-success m-1">Complete</button>
+                            <button *ngIf="trip.status==='ReadyToPick' && isCustomer" type="button" (click)="onCancel(trip)" class="btn btn-danger m-1">Cancel</button>
+                            <button type="button" class="btn btn-outline-info m-1" [routerLink]="['/booking/booking-detail']">View</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

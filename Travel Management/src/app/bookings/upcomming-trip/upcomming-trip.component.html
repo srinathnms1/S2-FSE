@@ -1,0 +1,38 @@
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Date Time</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Status</th>
+        <th></th>
+        <th *ngIf="isCustomer"></th>
+      </tr>
+    </thead>
+    <tbody *ngIf="!bookings || bookings.length===0">
+      There is no upcoming trips...
+    </tbody>
+    <tbody>
+      <tr *ngFor="let booking of bookings">
+        <td>{{booking.date | date}}</td>
+        <td>{{booking.from | titlecase}}</td>
+        <td>{{booking.to | titlecase}}</td>
+        <td>
+          <ng-container *ngIf="isCustomer; then customer; else employee">
+          </ng-container>
+          <ng-template #customer>
+            <button type="button" class="btn btn-success">Pending</button>
+          </ng-template>
+          <ng-template #employee>
+            <button type="button" (click)="onAccept(booking.id)"
+              class="btn btn-success">Accept</button>
+          </ng-template>
+        </td>
+        <td *ngIf="isCustomer">
+          <button *ngIf="isCustomer" (click)="onCancel(booking.id)" type="button" class="btn btn-danger">Cancel</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
